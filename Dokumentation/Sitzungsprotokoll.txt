@@ -1,0 +1,23 @@
+Sitzungsprotokoll Master Thesis A.Horvath
+-----------------------------------------
+
+12.09.2017, Sitzungszimmer P3; ran, zkl,hoa
+--------------------------------------------
+Kick-Off Master Thesis und Kennenlernen des Advisors Herr Klaus Zahn.
+
+Herr Zahn hat uns kurz durch sein CC geführt und eine aktuelle Arbeit vorgeführt, die ähnlichen Funktionen
+zu erfüllen hat wie die Master Thesis (Kamera, Computer Vision, Bildauswertung). Das System ist in einem
+Spritzwasser geschützten Kunststoffgehäuse untergebracht. Verwendet wird eine Raspberry Pi Kamera.
+
+Herr Zahn empfiehlt für die Entwicklung die Bildverarbeitungs - Library OpenCV einzusetzen die auch mit Python verwendet werden kann. 
+Als weitere Programmiersprache würde sich C++ anbieten.
+
+Ein erster Schritt bezüglich der Auswertung der Wolken-Aufnahmen sollte das Erstellen eines Userinterfaces sein. Dieses UI soll die Möglichkeit bieten, 
+die einzelnen Aufnahmen abspielen zu können und zudem die Anwendung von unterschiedlichen Algorithmen sichtbar/ auswertbar machen. 
+Sobald die Algorithmen wie gewünscht arbeiten, kann der Sourcecode direkt auf das Raspberry Pi übertragen werden und für die Vorhersage eingesetzt werden.
+
+To do bis:
+15.09.2017: Fertigstellung der Planung des Ablaufs der Master Thesis. 
+Die Planung soll in groben Zügen (wochenweise) die wichtigsten Arbeitsschritte aufzeigen.
+
+Nächstes Meeting: 15.09.2017, Sitzungszimmer P3

@@ -1,0 +1,3 @@
+Berechnet anz Sonnen-Stunden bezügl. Standort:
+----------------------------------------------
+http://suntag.ch/index.php
