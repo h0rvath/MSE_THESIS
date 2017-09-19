@@ -1,0 +1,482 @@
+<?xml version="1.0"?>
+<project name="ADL Sensor" version="1.2.1.40829">
+    <desc><![CDATA[Demonstrates use of the bit-banged I2C master interface by sampling the OPT3001 light sensor on the CC2650 SensorTag.
+
+The application is woken if the light sensor output value changes by more than a configurable amount:
+- If decreasing, the application blinks the red LED on the SensorTag.
+- If increasing, the application blinks the green LED on the SensorTag.
+
+See the header in the application source file ("main.c" or similar) for further details and instructions. This file is located in the source code output directory.]]></desc>
+    <pattr name="Board">None</pattr>
+    <pattr name="Chip name">CC2650</pattr>
+    <pattr name="Chip package">QFN32 5x5 RHB</pattr>
+    <pattr name="Chip revision">-</pattr>
+    <pattr name="Code prefix"></pattr>
+    <pattr name="Operating system">TI-RTOS</pattr>
+    <pattr name="Output directory">./source</pattr>
+    <task name="Read Light Temperature and Humidity">
+        <desc><![CDATA[Samples the OPT3001 light sensor on the CC2650 SensorTag. This light sensor integrates over longer periods of time to minimize the effect of 50 and 60 Hz noise sources.
+
+Each iteration of the I2C Light Sensor task:
+- Runs the Execution Code: The light sensor configured for 100 ms integration, and a single measurement is started. The timer based event trigger is enabled (100 ms + margin).
+- Runs the Event Handler Code: The light sensor value is read and processed.
+
+The light sensor output is converted from floating-point (12-bit mantissa, 4-bit exponent) to fixed-point (16-bit). The system CPU is alerted if the value is above or below configurable thresholds.
+
+Note that OPT3001 implements a timeout for I2C accesses, and will NACK I2C TX operations if a task debugging session halts execution in the middle of an I2C transaction.]]></desc>
+        <tattr name="ALS_CFG_ONE_SHOT" desc="OPT3001 configuration triggering 100 ms single conversion" type="hex" content="const" scope="task" min="0000" max="ffff">c210</tattr>
+        <tattr name="ALS_CFG_RESET" desc="OPT3001 configuration at reset (shutdown)" type="hex" content="const" scope="task" min="0000" max="ffff">c810</tattr>
+        <tattr name="ALS_I2C_ADDR" desc="OPT3001 I2C address" type="hex" content="const" scope="task" min="0000" max="ffff">008a</tattr>
+        <tattr name="ALS_REG_CFG" desc="OPT3001 configuration register" type="dec" content="const" scope="task" min="0" max="65535">1</tattr>
+        <tattr name="ALS_REG_RESULT" desc="OPT3001 result register" type="dec" content="const" scope="task" min="0" max="65535">0</tattr>
+        <tattr name="HTS_I2C_ADDR" desc="HTS221 address" type="hex" content="const" scope="task" min="0000" max="ffff">00be</tattr>
+        <tattr name="KX122_I2C_ADDR" desc="Accelerometer I2C Address" type="hex" content="const" scope="task" min="0000" max="ffff">003e</tattr>
+        <tattr name="cfg.H0RhX2" type="hex" content="struct" scope="task" min="0000" max="ffff">0000</tattr>
+        <tattr name="cfg.H0T0out" type="dec" content="struct" scope="task" min="-32768" max="32767">0</tattr>
+        <tattr name="cfg.H1RhX2" type="hex" content="struct" scope="task" min="0000" max="ffff">0000</tattr>
+        <tattr name="cfg.H1T0out" type="dec" content="struct" scope="task" min="-32768" max="32767">0</tattr>
+        <tattr name="cfg.InitAccel" desc="Was Accelerometer initalized?" type="dec" content="struct" scope="task" min="0" max="65535">0</tattr>
+        <tattr name="cfg.T0degCS16x8" type="dec" content="struct" scope="task" min="-32768" max="32767">0</tattr>
+        <tattr name="cfg.T0degCx8" type="hex" content="struct" scope="task" min="0000" max="ffff">0000</tattr>
+        <tattr name="cfg.T0out" type="dec" content="struct" scope="task" min="-32768" max="32767">0</tattr>
+        <tattr name="cfg.T1degCS16x8" type="dec" content="struct" scope="task" min="-32768" max="32767">0</tattr>
+        <tattr name="cfg.T1degCx8" type="hex" content="struct" scope="task" min="0000" max="ffff">0000</tattr>
+        <tattr name="cfg.T1out" type="dec" content="struct" scope="task" min="-32768" max="32767">0</tattr>
+        <tattr name="cfg.Tmsb" type="hex" content="struct" scope="task" min="0000" max="ffff">0000</tattr>
+        <tattr name="cfg.tmp0" type="hex" content="struct" scope="task" min="0000" max="ffff">0000</tattr>
+        <tattr name="cfg.tmp1" type="hex" content="struct" scope="task" min="0000" max="ffff">0000</tattr>
+        <tattr name="output.Hout" type="dec" content="struct" scope="task" min="-32768" max="32767">0</tattr>
+        <tattr name="output.Lout" desc="Light sensor output value" type="dec" content="struct" scope="task" min="0" max="65535">0</tattr>
+        <tattr name="output.Tout" type="dec" content="struct" scope="task" min="-32768" max="32767">0</tattr>
+        <tattr name="output.Xout" type="dec" content="struct" scope="task" min="-32768" max="32767">0</tattr>
+        <tattr name="output.Yout" type="dec" content="struct" scope="task" min="-32768" max="32767">0</tattr>
+        <tattr name="output.Zout" type="dec" content="struct" scope="task" min="-32768" max="32767">0</tattr>
+        <resource_ref name="ADC" enabled="0"/>
+        <resource_ref name="Analog Open-Drain Pins" enabled="0"/>
+        <resource_ref name="Analog Open-Source Pins" enabled="0"/>
+        <resource_ref name="Analog Pins" enabled="0"/>
+        <resource_ref name="COMPA" enabled="0"/>
+        <resource_ref name="Delay Insertion" enabled="0"/>
+        <resource_ref name="Differential Output Pins" enabled="0"/>
+        <resource_ref name="Digital Input Pins" enabled="0"/>
+        <resource_ref name="Digital Open-Drain Pins" enabled="0"/>
+        <resource_ref name="Digital Open-Source Pins" enabled="0"/>
+        <resource_ref name="Digital Output Pins" enabled="0">
+            <io_usage name="Accel_PWR" label="Enables Power to the Accelerometer">
+                <uattr name="Configuration on uninitialization">-1</uattr>
+                <uattr name="Output value on initialization">0</uattr>
+                <uattr name="Pin count">0</uattr>
+                <uattr name="Pin/0000">DIO2</uattr>
+                <uattr name="Pin/0001"></uattr>
+                <uattr name="Pin/0002"></uattr>
+                <uattr name="Pin/0003"></uattr>
+                <uattr name="Pin/0004"></uattr>
+                <uattr name="Pin/0005"></uattr>
+                <uattr name="Pin/0006"></uattr>
+                <uattr name="Pin/0007"></uattr>
+                <uattr name="Pin/0008"></uattr>
+                <uattr name="Pin/0009"></uattr>
+                <uattr name="Pin/0010"></uattr>
+                <uattr name="Pin/0011"></uattr>
+                <uattr name="Pin/0012"></uattr>
+                <uattr name="Pin/0013"></uattr>
+                <uattr name="Pin/0014"></uattr>
+                <uattr name="Pin/0015"></uattr>
+            </io_usage>
+        </resource_ref>
+        <resource_ref name="GPIO Event Trigger" enabled="0"/>
+        <resource_ref name="I2C Master" enabled="1">
+            <rattr name="SCL frequency">0</rattr>
+            <rattr name="SCL stretch timeout">20</rattr>
+            <io_usage>
+                <uattr name="SCL pin/0000">DIO8</uattr>
+                <uattr name="SDA pin/0000">DIO7</uattr>
+            </io_usage>
+        </resource_ref>
+        <resource_ref name="ISRC" enabled="0"/>
+        <resource_ref name="Math and Logic" enabled="0"/>
+        <resource_ref name="Multi-Buffered Output Data Exchange" enabled="0">
+            <rattr name="Buffer count">2</rattr>
+            <rattr name="Indicate overflow at buffer check">1</rattr>
+            <rattr name="Indicate overflow at buffer switch">0</rattr>
+            <rattr name="Prevent overflow at buffer switch">1</rattr>
+        </resource_ref>
+        <resource_ref name="Peripheral Sharing" enabled="0"/>
+        <resource_ref name="RTC Multi-Event Capture" enabled="0"/>
+        <resource_ref name="RTC-Based Execution Scheduling" enabled="1"/>
+        <resource_ref name="SPI Chip Select" enabled="0"/>
+        <resource_ref name="SPI Data Transfer" enabled="0">
+            <rattr name="MISO configuration when inactive">-1</rattr>
+            <rattr name="MOSI configuration on initialization">0</rattr>
+            <rattr name="MOSI configuration on uninitialization">0</rattr>
+            <rattr name="SCLK configuration on initialization">0</rattr>
+            <rattr name="SCLK configuration on uninitialization">0</rattr>
+            <io_usage>
+                <uattr name="MISO pin/0000"></uattr>
+                <uattr name="MOSI pin/0000"></uattr>
+                <uattr name="SCLK pin/0000"></uattr>
+            </io_usage>
+        </resource_ref>
+        <resource_ref name="System CPU Alert" enabled="1"/>
+        <resource_ref name="TDC" enabled="0"/>
+        <resource_ref name="Timer Event Trigger" enabled="1"/>
+        <resource_ref name="UART Emulator" enabled="0">
+            <rattr name="RX buffer size">64</rattr>
+            <rattr name="Required idle period before enabling RX">11</rattr>
+            <rattr name="TX buffer size">64</rattr>
+            <io_usage>
+                <uattr name="RX pin/0000"></uattr>
+                <uattr name="TX pin/0000"></uattr>
+            </io_usage>
+        </resource_ref>
+        <sccode name="event0"><![CDATA[// If a measurement was successfully started during the last execution ...
+if (state.i2cStatus == 0x0000) {
+
+    // Select the result register
+    i2cStart();
+    i2cTx(I2C_OP_WRITE | ALS_I2C_ADDR);
+    i2cTx(ALS_REG_RESULT);
+
+    // If successful ...
+    if (state.i2cStatus == 0x0000) {
+        U16 resultRegH;
+        U16 resultRegL;
+
+        // Read the result
+        i2cRepeatedStart();
+        i2cTx(I2C_OP_READ | ALS_I2C_ADDR);
+        i2cRxAck(resultRegH);
+        i2cRxNack(resultRegL);
+        i2cStop();
+
+        // Convert the result (4-bit exponent + 12-bit mantissa) into 16-bit fixed-point
+        U16 exp = resultRegH >> 4;
+        U16 mant = (resultRegH << 12) | (resultRegL << 4);
+        // The exponent is in range 0 to 11
+        U16 value = mant >> (11 - exp);
+        output.Lout = value;
+
+
+
+    } else {
+        i2cStop();
+    }
+}
+
+// Read Temperature
+if (state.i2cStatus == 0x0000) {
+
+    // Test Read H_OUT [x2A,0x2B] read from (0xAA)
+    i2cStart();
+    i2cTx(I2C_OP_WRITE | HTS_I2C_ADDR);
+    i2cTx(0xAA);
+    if (state.i2cStatus == 0x0000) {
+        i2cRepeatedStart();
+        i2cTx(I2C_OP_READ | HTS_I2C_ADDR);
+        i2cRxAck(cfg.tmp0);
+        i2cRxNack(cfg.tmp1);
+        i2cStop();
+        output.Tout = (cfg.tmp1 << 8) | cfg.tmp0;
+    } else {
+        i2cStop();
+    }
+}
+
+// Read Humidity
+if (state.i2cStatus == 0x0000) {
+
+    // Test Read H_OUT [x28,0x29] read from (0xA8)
+    i2cStart();
+    i2cTx(I2C_OP_WRITE | HTS_I2C_ADDR);
+    i2cTx(0xA8);
+    if (state.i2cStatus == 0x0000) {
+        i2cRepeatedStart();
+        i2cTx(I2C_OP_READ | HTS_I2C_ADDR);
+        i2cRxAck(cfg.tmp0);
+        i2cRxNack(cfg.tmp1);
+        i2cStop();
+        output.Hout = (cfg.tmp1 << 8) | cfg.tmp0;
+    } else {
+        i2cStop();
+    }
+}
+
+
+// Read Accel_X,Y,Z
+if (state.i2cStatus == 0x0000) {
+
+    i2cStart();
+    i2cTx(I2C_OP_WRITE | KX122_I2C_ADDR);
+    i2cTx(0x06);
+    if (state.i2cStatus == 0x0000) {
+        i2cRepeatedStart();
+        i2cTx(I2C_OP_READ | KX122_I2C_ADDR);
+        i2cRxAck(cfg.tmp0);
+        i2cRxAck(cfg.tmp1);
+        output.Xout = (cfg.tmp1 << 8) | cfg.tmp0;
+        i2cRxAck(cfg.tmp0);
+        i2cRxAck(cfg.tmp1);
+        output.Yout = (cfg.tmp1 << 8) | cfg.tmp0;
+        i2cRxAck(cfg.tmp0);
+        i2cRxNack(cfg.tmp1);
+        i2cStop();
+        output.Zout = (cfg.tmp1 << 8) | cfg.tmp0;
+    } else {
+        i2cStop();
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// Notify the application
+fwGenAlertInterrupt();]]></sccode>
+        <sccode name="execute"><![CDATA[// Configure and start the next measurement
+i2cStart();
+i2cTx(I2C_OP_WRITE | ALS_I2C_ADDR);
+i2cTx(ALS_REG_CFG);
+i2cTx(ALS_CFG_ONE_SHOT >> 8);
+i2cTx(ALS_CFG_ONE_SHOT >> 0);
+i2cStop();
+
+// Config HTS221 for single shot
+i2cStart();
+i2cTx(I2C_OP_WRITE | HTS_I2C_ADDR);
+i2cTx(0xA0);
+i2cTx(0x80); // Power ON, Single Shot mode
+i2cTx(0x01); // Start single shot
+i2cStop();
+
+
+// Read the result after 100 milliseconds + a 20% margin
+evhSetupTimerTrigger(0, 120, 2);
+
+// Schedule the next execution
+fwScheduleTask(1);]]></sccode>
+        <sccode name="initialize"><![CDATA[// Enable Accelerometer
+//gpioSetOutput(AUXIO_O_ACCEL_PWR);
+
+
+// Read Temperatur Callibration Factors of the HTS221
+// -------------------------------------------------------
+
+// Read T0_degC_x8 [0x32]
+i2cStart();
+i2cTx(I2C_OP_WRITE | HTS_I2C_ADDR);
+i2cTx(0x32);
+i2cRepeatedStart();
+i2cTx(I2C_OP_READ | HTS_I2C_ADDR);
+i2cRxNack(cfg.T0degCx8);
+i2cStop();
+
+// Read T1_degC_x8 [0x33]
+i2cStart();
+i2cTx(I2C_OP_WRITE | HTS_I2C_ADDR);
+i2cTx(0x33);
+i2cRepeatedStart();
+i2cTx(I2C_OP_READ | HTS_I2C_ADDR);
+i2cRxNack(cfg.T1degCx8);
+i2cStop();
+
+// Read T1/T0 msb [0x35]
+i2cStart();
+i2cTx(I2C_OP_WRITE | HTS_I2C_ADDR);
+i2cTx(0x35);
+i2cRepeatedStart();
+i2cTx(I2C_OP_READ | HTS_I2C_ADDR);
+i2cRxNack(cfg.Tmsb);
+i2cStop();
+
+// combine MSB and LSB
+cfg.T0degCS16x8 = (((cfg.Tmsb & 0x03) << 8) | cfg.T0degCx8);
+cfg.T1degCS16x8 = (((cfg.Tmsb & 0x0C) << 6) | cfg.T1degCx8);
+
+// Read T0_OUT [0x3C,0x3D] read from (0xBC)
+i2cStart();
+i2cTx(I2C_OP_WRITE | HTS_I2C_ADDR);
+i2cTx(0xBC);
+i2cRepeatedStart();
+i2cTx(I2C_OP_READ | HTS_I2C_ADDR);
+i2cRxAck(cfg.tmp0);
+i2cRxNack(cfg.tmp1);
+i2cStop();
+cfg.T0out = ((cfg.tmp1 << 8) | cfg.tmp0);
+
+// Read T1_OUT [0x3E,0x3F] read from (0xBE)
+i2cStart();
+i2cTx(I2C_OP_WRITE | HTS_I2C_ADDR);
+i2cTx(0xBE);
+i2cRepeatedStart();
+i2cTx(I2C_OP_READ | HTS_I2C_ADDR);
+i2cRxAck(cfg.tmp0);
+i2cRxNack(cfg.tmp1);
+i2cStop();
+cfg.T1out = (cfg.tmp1 << 8) | cfg.tmp0;
+
+// -------------------------------------------------------
+
+
+// Read Humidity Callibration Factors
+// -------------------------------------------------------
+// Read H0_rH_x2 [0x30]
+i2cStart();
+i2cTx(I2C_OP_WRITE | HTS_I2C_ADDR);
+i2cTx(0x30);
+i2cRepeatedStart();
+i2cTx(I2C_OP_READ | HTS_I2C_ADDR);
+i2cRxNack(cfg.H0RhX2);
+i2cStop();
+
+// Read H1_rH_x2 [0x31]
+i2cStart();
+i2cTx(I2C_OP_WRITE | HTS_I2C_ADDR);
+i2cTx(0x31);
+i2cRepeatedStart();
+i2cTx(I2C_OP_READ | HTS_I2C_ADDR);
+i2cRxNack(cfg.H1RhX2);
+i2cStop();
+
+// Read H0_T0_OUT [0x36,0x37] read from 0x36 | 0x80 (0xB6)
+i2cStart();
+i2cTx(I2C_OP_WRITE | HTS_I2C_ADDR);
+i2cTx(0xB6);
+i2cRepeatedStart();
+i2cTx(I2C_OP_READ | HTS_I2C_ADDR);
+i2cRxAck(cfg.tmp0);
+i2cRxNack(cfg.tmp1);
+i2cStop();
+cfg.H0T0out = (cfg.tmp1 << 8) | cfg.tmp0;
+
+// Read H1_T0_OUT [0x3A,0x3B] read from 0x3A | 0x80 (0xBA)
+i2cStart();
+i2cTx(I2C_OP_WRITE | HTS_I2C_ADDR);
+i2cTx(0xBA);
+i2cRepeatedStart();
+i2cTx(I2C_OP_READ | HTS_I2C_ADDR);
+i2cRxAck(cfg.tmp0);
+i2cRxNack(cfg.tmp1);
+i2cStop();
+cfg.H1T0out = (cfg.tmp1 << 8) | cfg.tmp0;
+
+// -------------------------------------------------------
+
+
+
+
+// Start Up delay for Accelerometer
+for (U16 n = 0; n < 65000; n++){
+    cfg.InitAccel +=1;
+}
+
+
+// Set Accelerator for motion detection
+// -------------------------------------------------------
+
+
+// Write 0x02 to Control Register 1 (CNTL1) [0x18] to set the accelerometer in stand-by mode,
+// to set the performance mode to 16 bit resolution, G-range to +/-2g,
+// and enable the Wake Up (motion detect) function.
+i2cStart();
+i2cTx(I2C_OP_WRITE | KX122_I2C_ADDR);
+i2cTx(0x18);
+i2cTx(0x02);
+i2cStop();
+
+// Write 0x03 to Control Register 3 (CNTL3) [0x1A] to set the Output Data Rate of the Wake Up
+// function (motion detection) (OWUF) to 6.25 Hz. Default 0.781Hz
+i2cStart();
+i2cTx(I2C_OP_WRITE | KX122_I2C_ADDR);
+i2cTx(0x1A);
+i2cTx(0x03);
+i2cStop();
+
+//  // Write 0x7F to Interrupt Control Register 2 (INC2) [0x1D] to define the direction of detected
+//  // motion  for  all  positive  and  negative  directions:  x  positive  (x+),  x  negative  (x-),  y
+//  // positive (y+), y negative (y-), z positive (z+), z negative (z-) directions.
+//  i2cStart();
+//  i2cTx(I2C_OP_WRITE | KX122_I2C_ADDR);
+//  i2cTx(0x1D);
+//  i2cTx(0x7F);
+//  i2cStop();
+
+// Write  0x01  to  Interrupt  Wake-Up  Timer  (WUFC) [0x23] to  set  the  time  motion  must  be
+// present before a wake-up interrupt is set to 0.16 second.
+i2cStart();
+i2cTx(I2C_OP_WRITE | KX122_I2C_ADDR);
+i2cTx(0x23);
+i2cTx(0x01);
+i2cStop();
+
+// Write  0x00  to  Interrupt  Wake-Up  Threshold  (ATH) [0x30]  to  set  the  level  to  0.07g.
+i2cStart();
+i2cTx(I2C_OP_WRITE | KX122_I2C_ADDR);
+i2cTx(0x30);
+i2cTx(0x01);
+i2cStop();
+
+// Write 0x3A to Interrupt Control Register (INC5) [0x20] to output the physical interrupt of the
+// previously defined Wake-Up detect function. This value will create an active high.
+i2cStart();
+i2cTx(I2C_OP_WRITE | KX122_I2C_ADDR);
+i2cTx(0x20);
+i2cTx(0x3A);
+i2cStop();
+
+// Write  0x02  to  Interrupt  Control  Register  6 (INC6) [0x21]  to  set  the  WUF  interrupt  to  be
+// reported on physical interrupt pin INT2.
+i2cStart();
+i2cTx(I2C_OP_WRITE | KX122_I2C_ADDR);
+i2cTx(0x21);
+i2cTx(0x02);
+i2cStop();
+
+// Write 0x82 to Control Register 1 (CNTL1) [0x18] to set the accelerometer in operating mode
+// with the previously defined settings.
+i2cStart();
+i2cTx(I2C_OP_WRITE | KX122_I2C_ADDR);
+i2cTx(0x18);
+i2cTx(0x82);
+i2cStop();
+
+// END Accelerometer -------------------------------------
+
+
+
+// Schedule the first execution
+fwScheduleTask(1);]]></sccode>
+        <sccode name="terminate"><![CDATA[// Shut down the light sensor
+i2cStart();
+i2cTx(I2C_OP_WRITE | ALS_I2C_ADDR);
+i2cTx(ALS_REG_CFG);
+i2cTx(ALS_CFG_RESET >> 8);
+i2cTx(ALS_CFG_RESET >> 0);
+i2cStop();
+
+// Shut down HTS221
+i2cStart();
+i2cTx(I2C_OP_WRITE | HTS_I2C_ADDR);
+i2cTx(0xA0);
+i2cTx(0x00);
+i2cTx(0x00);
+i2cStop();
+
+//gpioClearOutput(AUXIO_O_ACCEL_PWR);
+
+
+
+// Cancel the potentially active event trigger
+evhCancelTrigger(0);]]></sccode>
+        <tt_iter>run_execute,run_event0</tt_iter>
+        <tt_struct>output.Hout,output.Lout,output.Tout</tt_struct>
+    </task>
+</project>

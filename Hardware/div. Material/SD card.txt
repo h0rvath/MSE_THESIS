@@ -1,0 +1,6 @@
+SD Card
+
+
+Biggest SD - Card used for Raspberry PI:
+-----------------------------------------
+https://www.raspberrypi.org/forums/viewtopic.php?t=46447

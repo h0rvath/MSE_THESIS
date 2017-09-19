@@ -1,0 +1,2 @@
+M42 * 0.75 = 31.5mm oder 3.15 cm
+M42 = 37,5 (Kernlochgrösse)

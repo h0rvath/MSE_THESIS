@@ -1,0 +1,43 @@
+Marek, 
+Could you pls help him access the data.
+Thanks
+
+Von meinem iPhone gesendet
+
+Am 05.09.2017 um 13:48 schrieb Horvath Attila HSLU T&A <attila.horvath@hslu.ch>:
+Guten Tag Herr Prof. Dr. Wittkopf
+ 
+Ich bin MSE-Student und Assistent am iHomeLab, CC für Gebäudeintelligenz und stehe kurz davor mit meiner Masterthesis zu beginnen.
+Für meine Masterthesis, «Prognose der Sonneneinstrahlung mittels einer kostengünstigen Kamera», benötige ich aktuelle Messwerte der Solarstrahlung.
+Der HSLU-Homepage entnehme ich, dass Ihr CC Solarstrahlungsmessungen mittels einem Pyranometer betreibt. Ich möchte Sie deshalb fragen, ob vielleicht
+die Möglichkeit besteht, Ihre Pyranometer - Messdaten von Ihnen zu beziehen ?
+ 
+Für eine kurze Rückantwort wäre ich Ihnen Dankbar.
+ 
+Freundliche Grüsse
+Attila Horvath
+
+-------------------------------------------------------------------------------------------
+Dear Attila,
+
+Indeed we operate the solar measurement station which consist of two pyrometer. One of them measures the 
+global irradiance and the second one, with shading ring, measures diffuse irradiance. The irradiance is measured with one minutes intervals. 
+The data are logged and can be accessed retrospectively. Once you let me know the time frame I can download the data and email them to you. 
+
+Hope it helps, fell free to contract me if you have any further questions.
+
+Best regards
+Marek Krehel 
+
+-- 
+Lucerne University of Applied Sciences and Arts
+School of Engineering and Architecture
+
+Institute of Civil Engineering
+CC Building Envelopes
+Dr. Marek Krehel
+Dr. sc. ETH Zurich
+Senior Research Associate
+
+T direct: +41 41 349 36 41
+marek.krehel@hslu.ch

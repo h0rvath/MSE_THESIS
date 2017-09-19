@@ -1,0 +1,7 @@
+im momment wird noch linkknx verwendet später soll jedoch Openhub eingesetzt werden.
+
+ftp Zugang für fronius-Daten:
+-----------------------------
+ftp = ftplib.FTP('ftp.ihomelab.ch')
+ftp.login('wizeedata', 'OmGunq8N')
+ftp.cwd('/fronius_st11')

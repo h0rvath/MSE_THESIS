@@ -1,0 +1,15 @@
+Method 2: Remove partition from SD card/USB flash drive with Diskpart
+
+DiskPart is a command-line utility contained in Windows operating system, which can help partition both external and internal device. To  remove partitions on SD card or USB drive in Windows 10/8/7 with this program, you can take the following steps: 
+
+1. Click Start Menu and then type diskpart in search box
+
+2. At the diskpart prompt, type list disk
+
+3. Type select disk n ( n stands for the disk where you plan to delete the partition)
+
+4. Type list partition
+
+5.Input select partition n (n is the partition you want to delete)
+
+6.Type delete partition (then the partition can be deleted)

@@ -1,0 +1,24 @@
+Was ist solar iradiance/insolation?
+------------------------
+https://provideyourown.com/2012/solar-insolation-understanding/
+https://www.nasa.gov/image-feature/goddard/2017/sdo-views-2017-solar-eclipse-171-angstrom
+
+Wie misst man die Solare Einstrahlung?
+--------------------------------------
+https://www.researchgate.net/post/What_equipment_do_I_need_to_measure_solar_energy_at_a_site_to_be_able_to_predict_the_output_of_solar_panels
+
+Diverse private Seiten:
+-----------------------
+http://andyschroder.com/SolarEnergyResearch/SolarCollectorPowerOutput
+
+Solar Resource Models and Tools:
+--------------------------------
+https://www.nrel.gov/rredc/models_tools.html
+
+Online daten rund um Sonnenstrahlung:
+-------------------------------------
+http://www.soda-pro.com/
+
+DIY Pyranometer:
+----------------
+http://www.umnicom.de/Elektronik/Projekte/Wetterstation/Sensoren/Pyranometer/Pyranometer.htm

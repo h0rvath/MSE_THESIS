@@ -1,0 +1,2 @@
+All sky camera software enables the user to sample the sky at periodic intervals, analyze the images for motion, and transfer the images and data to a web service
+https://www.raben.com/content/all-sky-camera-software

@@ -1,0 +1,22 @@
+Suchbegriffe:
+1)python  AUTOMATIC CLOUD DETECTION FOR ALL SKY
+
+Automatic cloud detection for all sky:
+--------------------------------------
+https://www.youtube.com/watch?v=cPlhQGjDWMM
+
+Building a cloud detector (temperatur drop if no clouds):
+---------------------------------------------------------
+http://www.farnham-as.co.uk/2013/04/building-a-cloud-sensor/
+https://chrisramsay.co.uk/posts/2014/03/cloud-detection-part-one/
+https://www.youtube.com/watch?v=HJjRYFi8NrA&feature=youtu.be
+http://fritzing.org/projects/poor-mans-lidar/
+
+http://blog.stevemarple.co.uk/2013/05/an-open-access-cloud-detection-network.html
+http://kcotar.org/arduino-weather-station-1/
+https://www.noao.edu/staff/gillespie/projects/cloud-detector.html  (Peltier)
+http://www.prc68.com/I/Cloud.shtml
+
+Theorie hinter IR Sensor:
+--------------------------
+http://www.kwos.org/clouds_detector.htm

@@ -1,0 +1,33 @@
+1) Anforderungen an das Gerät definieren:60' Vorhersagezeitraum -> welcher mindest Zeitraum muss gegeben sein?
+2) Stand der Technik: Was gibt es schon am Markt? - Welche eigenschaften haben diese?
+3) Welche Algorithmen sind geeignet? -> openCv evaluieren <-> welche Einschränkungen sind durch die algorithmen gegeben?
+4) Welche Rechenleistung ist notwendig? 
+5) Sensorik evaluiren welche Sensoren werden benötigt?
+6) Verfahren um Zuverlässigkeit testen zu können.
+7) Welche Optimierung ist möglich? - Kann zuverlässigkeit erhöht werden, wie? - Wie weit kann Auflösung/Dynamikbereich der Kam reuziert werden?
+
+Optimierungsvorschläge:
+-----------------------
+"Forecast" + "cloud tracking" + "GPU"
+"Methodology of tracking a cloud"
+"solar irradiance forecasting"
+
+-> Mehrprozessorkerne ausnutzen
+-> Berechnungen Auslagern -> e.g. Cloud-Computing
+-> GPU ?
+-> Overclocking
+-> Mehrere Threads...
+
+
+Using Raspi's GPU:
+------------------
+using rpi's GPU: https://www.raspberrypi.org/forums/search.php?keywords=qpu
+GPU Accelerated Camera Processing On The Raspberry Pi: http://robotblogging.blogspot.ch/2013/10/gpu-accelerated-camera-processing-on.html
+https://petewarden.com/2014/08/07/how-to-optimize-raspberry-pi-code-using-its-gpu/
+-> CUDA
+
+CUDA:
+-----
+https://de.wikipedia.org/wiki/CUDA
+[CUDA (früher auch Compute Unified Device Architecture genannt) ist eine von Nvidia entwickelte 
+Programmier-Technik, mit der Programmteile durch den Grafikprozessor (GPU) abgearbeitet werden können.]

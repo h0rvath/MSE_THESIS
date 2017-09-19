@@ -1,0 +1,127 @@
+############################################################################
+#
+# Prozessfluss zur Bestimmung der Sonneneinstrahlung mittels 'cloud-tracking'
+#
+############################################################################
+spatial-> räumlichen
+
+Annahmen: Wolken bewegen sich relat. langsam mit konst. Geschwindigkeit und verändern ihre Form wärend kurzen 
+          Zeitspannen kaum.
+		  
+Die maximale Vorhersagezeit ist bestimmt durch die Geschwindigkeit und Höhe der Wolke. Sie wird vorgegeben durch
+die Zeit welche eine Wolkenformation zum Durchlaufen des aufgenommenen Bildes benötigt (tipischerweise 15-30 Minuten)
+
+Es werden häufig CCD-Kameras (charge-coupled device chips) mit Weitwinkel-Objektiven verwendet. Die Bilder werden
+auf das sogennate RBR - Verhältnis (red-to-blue ratio) hin ausgewertet. RBR ist dabei ein Indikator für das Vorhandensein
+oder Fehlen einer Wolke (unterschiedliche Lichtbrechung abhängig von der Luftfeuchtigkeit). 
+Ein hoher RBR = Wolken und ein tiefer RBR = klarer Himmel. Zudem kann die Helligkeit einzelner Pixel zusätzlich 
+zur Bestimmung der Bewölkung verwendet werden.
+
+Sogenannte 'binary cloud decision maps' -> weiss = Wolke, schwarz = wolkenfreier Himmel können aus den RBR erstellt werden.
+Hierzu wird aufgrund eines Thresholds binär entschieden. Zusätzlich kann auch zwischen hellen und dunklen Wolken 
+unterschieden werden.
+
+Die Wolken-Karte (Schattenwurf) muss auf den Erdboden transformiert (projeziert werden). Dazu wird die Höhe der 
+Wolkendecke sowie die Position der Sonne benötigt. (Deshalb ist auch eine hohe räumliche Auflösung notwendig!)
+
+Bestimmung der Wolkenbewegung z.B. nach Chow et al. (2011) indem die normalisierter Kreuzkorrelation bestimmter Regionen
+(dort wo Wolken vorhanden sind) zwischen konsekutiven Bildern maximiert wird .
+Alternativ hierzu kann das Verfahren 'optical Flow' aus der Bildverarbeitung (computer vision) angewendet werden.
+Mittels denn CMV's (cloud motion vectors) kann die zukünftige Position einer Wolke bestimmt werden.
+
+Wolken-Schattenkarten erhält man mittels der Projektion der zukünftige Position einer Wolke. Aus den Wolken-Schattenkarten
+lassen sich die erwarteten Sonnenstrahlungsdichten abschätzen.
+
+Langzeit Vorhersagen:
+---------------------
+In erster Linie bestimmt die Aufnahmedauer die grösstmögliche Vorhersagezeit. Diese wiederum ist abhängig von Wolkengeschwindigkeit 
+sowie der zurückgelegten Distanz, also im Falle eine all Sky-Kamera der tatsächlichen Horizont zu Horizont Distanz die im
+besten Fall nur von der Beobachtungshöhe anhängt. 
+Bei freier Sicht und einer Beobachtungshöhe von 10m beträgt die Horizont zu Horizont Distanz ca 150Km. Bewegt sich eine Wolke
+mit einer durchschnittlichen Geschwindigkeit von ca. 14.5km/h, dann beträgt die Dauer um von einem zum anderen Horizont zu
+gelangen ca. = 0.78*60 = 45 Minuten was bereits unter einer Stunde liegt.
+
+Um dennoch Vorhersagen über grössere Zeiträume treffen zu können sind zusätzliche Daten notwendig wie sie z.B. über 
+Satteliten-Bilder gewonnen werden können. (Irradiance Forecasting with NWP's) Eine Übersicht gibt (Kalnay 2003).
+
+
+Zusammenfassend:
+-----------------
+1) Bilder der lokalen Wolkendecke von Kamera/Satteliten
+2) Vroausgesetzt Wolkenform ändert kaum: CMV's (cloud motion vectors) bestimmen, indem die Position bestimmter 
+   Punkte in aufeinanderfolgende Bilder miteinander verglichen werden.
+3) Unter der Annahme dass sich die Geschwindigkeit der Wolke nicht sehr ändert, wird die zukünftige Position der
+   Wolke (aus den CMV's) berechnet (extrapoliert).
+   
+
+Teilaspekte/Schwierigkeiten:
+----------------------------
+Wolkenhöhe:
+Die tatsächliche Wolkenhöhe ist entscheidend für eine gute Prognose. Sehr genaue Werte erhält man mittels einem 
+Ceilometer (LIDAR).
+Different methods to determine cloud height using information from more than one sky imager are shortly introduced 
+in Urquhart et al. (2013) and Prahl et al. (2014).   
+
+clear-sky library (Chow et al. 2011):
+Ungleichmässiges 'clear-sky'-Signal in Abhängigkeit von der Position der Sonne
+
+Wird verwendet um noch differenzierter die Helligkeit zu klassifizieren. Man unterscheidet so auch
+zwischen hellen und dunklen Wolken oder auch hellem und dunklem Himmel.
+
+cloud classification algorithm (2010 Heinle, Macke and Srivastav): 
+berechnet die optische Dichte von Wolken und ermöglicht zusätzlich die Wolkenhöhe
+abzuschätzen.
+
+(Unsicherheit bei der) Bestimmung der Sonnenstrahlungsdichte:
+Aus den Wolkenschattenkarten wird die zu erwartende Sonnstrahlungsdichte geschätzt. Ohne jedoch die genaue (optische)
+Beschaffenheit der Wolke und Atmosphäre (klarer Himmel) zu kennen ist diese stets fehlerbehaftet. Eine zusätzliche lokale
+Messung zum Abgleichen der Vorhersage scheint unabdingbar zu sein (Messen mittels geeichter Photodiode)!
+Ein verteiltes Netz von Messstationen könnte abhilfe leisten: (Macke and HOPE-Team, 2014] and (Madhavan, Kalisch, and Macke 2014;)
+-Urquhart et al. (2013) analyze frequency distributions of PV power normalized to clear-sky conditions to determine a 
+ clear and a cloudy mode and to assign them to shaded and unshaded cells, respectively. 
+-Gauchet et al. 2012 propose the use of a regression model in combination with a clear-sky model to estimate the 
+ surface solar irradiance from segmented sky images with information about clear-sky, bright, and dark clouds; circumsolar 
+ area; and solar disk.
+ 
+############################################################################
+#
+# Idee(n):
+#
+############################################################################
+
+Lennfähiges (neurale Netze) mit cloud classification (optiche Dichte von Wolken)
+Wolkenverteilung/-Form/ für patternrecognition? -> kann daraus Zukünftiges abgeleitet werden?
+
+Distanz Horizont zu Horizont:
+-----------------------------
+Distanz Horizont - Horizont ist abhängig von der Höhe (h) des Bebachters.
+Horw Höhe über Meer: h = 441m
+Wikipedia (unteschiedliche Modelle): https://en.wikipedia.org/wiki/Horizon
+ohne Effekte der Lichtbrechung: Apptoximation Beobachter-Horizont: d = 3.57*sqrt(h) 
+(where d is in kilometres and h is height above ground level in meter) 
+-> Horw: d = 74.97 -> Horizont - Horizont = 2*d = 149.94km
+Möglicher forecast bei Windgesch 4m/s resp. 14.5km/h ca. 10h
+
+Hingegen wenn h = 10m (Hausdach) -> d = 3.57*sqrt(10) = 11.3km
+Möglicher forecast bei 4m/s resp. 14.5km/h ca. = 0.78*60 = 45 Minuten
+
+###########################################################################
+#
+# Diverses:
+#
+############################################################################
+
+Wolken Höhe und Geschwindigkeit aus den Flughafen-Meto Daten beziehen (METAR)
+https://www.euroairport.com/de/umwelt/flugbewegungen/erlaeuterung-metar.html
+https://de.wikipedia.org/wiki/METAR
+METAR DATEN als RAW-Daten beziehen: https://aviationweather.gov/metar/data?ids=LFSB&format=raw&date=0&hours=0
+direkt aufgeschlüsselt: http://de.allmetsat.com/metar-taf/deutschland.php?icao=LSZH
+BSP Kloten ZH: METAR: LSZH 301220Z 24010KT 190V300 CAVOK 31/15 Q1013 NOSIG
+
+###########################################################################
+#
+# Kamera:
+#
+############################################################################
+Auflösung pro Pixel: Chip rechteck mit x*y pixel. Bild wird auf diese Fläche projiziert.
+fulcrum3d: Images are captured in full colour at a high sampling rate (~6s per image) to ensure small changes in cloud locations and shape are detected.

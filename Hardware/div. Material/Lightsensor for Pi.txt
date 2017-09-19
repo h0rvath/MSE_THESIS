@@ -1,0 +1,9 @@
+Light sensor for Pi:
+--------------------
+https://www.adafruit.com/product/439
+http://scholtyssek.org/blog/de/2014/11/24/tsl2561-lichtsensor-mit-dem-stm32f4/
+
+
+Other vendors:
+--------------
+http://www.ti.com/product/OPT3001

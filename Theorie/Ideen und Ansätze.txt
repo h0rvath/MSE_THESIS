@@ -1,0 +1,13 @@
+Fabian Kern:
+------------
+Seite(22)
+Die NWP (Numerical Weather Prediction) hat eine geringe Zeitliche Luflösung. Laut Diagne et al. kann diese durch lokale Beobachtung des Himmels verbessert werden.
+Zudem kann eine Korrektur durch Model Output Statistic (MOS) eingesetzt werden. Hierbei werden Messwerte lokaler Wetterstationen verwendet, die mit den NWP-Daten 
+durch multilineare Regressionsgleichungen in Zusammenhang gebracht werden und so genauere Ergebnisse liefern.
+Um schlechte Vorhersagen bei einer Wolkenbedeckung von 40-80% zu verringern kann durch eine lokale Globalstrahlungsmessung und eienr Bias-Korrektur die Vorhersage verbessert werden.
+
+Reinhardt:
+----------
+Die haben einen Sensor zur Wolkendetecktion: Miniaturisierter  Klimasensor  zur  Messung  der  Bewölkung
+ob der Himmel klar oder von einer Wolkenschicht bedeckt ist, Ausgangssignal zwischen logisch 0 und logisch 1 (in unserem Fall 5 V)
+Er ermöglicht die klare Erkennung von Bewölkung oder Nicht-Bewölkung.Über die ermessenen Werte kann auch die Wolkenuntergrenze ermittelt werden.  

@@ -1,0 +1,4 @@
+Springer Materials ist eine Datensammlung aus den Gebieten Physik, Chemie, Materialwissenschaften und den angrenzenden Fachbereichen. Das System stellt die weltweit umfangreichste Datenkollektion mit Informationen über Materialien und deren Eigenschaften dar und enthält beispielsweise die Landolt-Börnstein-Buchserie, Adsorptionsdaten und Substanzsteckbriefe.
+Springer Materials steht über die Bibliothek zur Verfügung und ist im Netzwerk der Hochschule Luzern (von extern via VPN) unter diesem Link abrufbar. 
+
+http://rzblx10.uni-regensburg.de/dbinfo/detail.php?bib_id=hslu&colors=&ocolors=&lett=fs&tid=0&titel_id=9686

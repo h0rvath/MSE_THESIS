@@ -1,0 +1,73 @@
+Raspberry Sky: All sky Raspberry Pi camera:
+-------------------------------------------
+Selbstbau All Sky Camera:
+http://www.instructables.com/id/Wireless-All-Sky-Camera/
+
+Daytime Aufnahmen mit ASI120MC:
+http://www.astroshop.de/kameras/zwo-kamera-asi-120-mc-s-color/p,45258
+https://www.youtube.com/watch?v=SXPuX_eubm8
+https://www.youtube.com/watch?v=S8P7lj55nHs
+https://www.youtube.com/watch?v=7EE_Yav3hYs
+http://daveshorizon.blogspot.ch/p/zwo-asi120mm-s-as-allsky.html
+
+Fiseye
+https://www.amazon.com/dp/B01CX4U7DK/ref=asc_df_B01CX4U7DK1504350000000?tag=merbethomgarbhg-20&creative=395261&creativeASIN=B01CX4U7DK&linkCode=asn&ascsubtag=217170952
+
+-ASI224MC camera
+-Arecont Vision CS-Mount 1.55mm Fixed Focal Megapixel Lens 1/2" 1.55mm IR MP
+
+Orion StarShoot AllSky
+
+http://www.darkmattersheep.uk/blog/the-great-raspberry-pi-all-sky-adventure/
+https://www.cloudynights.com/topic/466171-raspberry-pi-all-sky-camera/
+https://www.youtube.com/watch?v=j51qLzRvz2k
+https://www.youtube.com/watch?v=8g33wJ6kR2Y
+
+Lens:
+-----
+http://www.uctronics.com/camera-module-c-377.html?limit=40
+Fujinon f1.4 1-4-3.1mm fisheye lens
+
+##################################################################################
+#
+#      How to Raspberry Pi Camera
+#
+##################################################################################
+
+getting started:
+----------------
+https://www.raspberrypi.org/learning/getting-started-with-picamera/worksheet/
+
+~$ raspistill -rot 90 -o test3.jpg
+
+~$ raspistill -sh test.jpg --sharpness 50
+
+How-tos taking pictures:
+------------------------
+http://www.raspberrypi-spy.co.uk/2013/05/taking-hi-res-photos-with-the-pi-camera-module/
+https://www.raspberrypi.org/documentation/raspbian/applications/camera.md
+
+Best high resolution cameras for raspberry pi
+---------------------------------------------
+https://www.raspberrypi.org/blog/new-8-megapixel-camera-board-sale-25/
+
+Vergleich high res raspi cameras
+--------------------------------
+http://www.semifluid.com/2017/01/23/raspberry-pi-camera-comparison/
+http://blog.helmutkarger.de/raspberry-video-camera-teil-3-raspberry-pi-kamera-modul-v2-1/
+
+Waveshare Übersicht:
+--------------------
+http://www.waveshare.com/rpi-camera-f.htm
+
+All Sky Camera:
+--------------
+https://www.youtube.com/watch?v=AhmlkRNTvqo&feature=youtu.be
+http://www.swagastro.com/mallincam-all-sky.html
+
+##################################################################################
+#
+#      Python for ZWO camera
+#
+##################################################################################
+http://blog.stevemarple.co.uk/2016/12/aurorawatch-uk-camera-update-1.html

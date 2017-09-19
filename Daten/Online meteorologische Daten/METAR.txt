@@ -1,0 +1,21 @@
+Wolken Höhe und Geschwindigkeit aus den Flughafen-Meto Daten beziehen (METAR)
+https://www.euroairport.com/de/umwelt/flugbewegungen/erlaeuterung-metar.html
+https://de.wikipedia.org/wiki/METAR
+METAR DATEN als RAW-Daten beziehen: https://aviationweather.gov/metar/data?ids=LFSB&format=raw&date=0&hours=0
+direkt aufgeschlüsselt: http://de.allmetsat.com/metar-taf/deutschland.php?icao=LSZH
+BSP Kloten ZH: METAR: LSZH 301220Z 24010KT 190V300 CAVOK 31/15 Q1013 NOSIG
+
+Blogs/pages:
+-------------
+https://nelsonslog.wordpress.com/2012/01/04/metar-parsing-libraries/
+
+python-metar's documentation:
+----------------------------
+http://python-metar.readthedocs.io/
+
+
+PYTHON SCRIPT:
+--------------
+METAR/SPECI Daten über NOAA abholen : https://github.com/tomp/python-metar
+
+METAR/SAT, AWIDS : https://github.com/keltonhalbert/AWIDS

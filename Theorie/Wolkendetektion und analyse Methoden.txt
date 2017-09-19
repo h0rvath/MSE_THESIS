@@ -1,0 +1,121 @@
+﻿ #############################################################################################
+ #                                                                                           #
+ #                        Wolkendetektion und analyse Methoden                               #
+ #                                                                                           #
+ #############################################################################################
+ Aus Buch: Jan Kleissl ab Seite 203
+ Aus demselben Buch S 214 ist ein gutes Prozess-Diagramm welches den Zeitlichen Ablauf der hier beschriebnen Teilschritte zeigt!
+ Aus demselben Buch S 215 wird anhand einr Case-Study jeder Teilschritt aufgezeigt.
+ Aus demselben Buch S 218 werden die Error Metrics beschrieben.
+
+ Basis-Technik: 
+ --------------
+ Wolkensysteme werden mittels Bodenkameras erfasst. Sind Position und Geschwidigkeit bekannt, kann eine zukünftige Position geschätzt werden.
+
+ Wolken-Detektion:
+ -----------------
+ Wokenpositionen innerhalb von 0-30min können mit den folgenden techniken detektiert werden.
+ Verwendet wird die sog. RBR-Methode: red-blue ratio genaue Erklärung (molecular scattering) auf S 204. Das RBR von Pixeln bewölkter Regionen
+ ist nahe bei 1 wohingegen Pixel des klaren Himmels wesentlich kleiner als 1 sind. Bestimmt man die typischen RBR Werte von Pixeln für klaren und 
+ bewölkten Himmel, kann draus ein Threshold bestimmt werden womit zwischen den beiden Zuständen 'bewölkt' und 'klarer Himmel' unterschieden 
+ werden kann. Es ensteht so eine binäre Abbildung des hhimmels (binary mapping of the sky).
+ Die RBR Methode verwendet den RGB-Farbraum, es könnCen jedoch auch andere Farbräume verwendet werden. Klarer Himmel streut den roten Anteil viel
+ weniger als den blauen und hat somit einen tiefen min(R,G,B) was zu einer hohen Sättigung führt und gleichbedeutend mit einem wolkenlosen Himmel ist.
+ Wolken haben dagegen einen gleichmäsigverteilten Anteil an R, G und B Anteilen weshalb die Sättigung tief ist und die Farbe nicht 'rein' -> grau.
+ Die Klassifikation (insbesondere der Wolkendichte) kann nach unterschiedlichen Methoden/Ansätzen erfolgen unteranderm auch mittels neuralen 
+ Netzen. Eine Übersicht bietet: (comprehensive review of cloud-detection methodologies can befound in Tapakis and Charalambides (in press, 2013).)
+
+ Dynamische Clear-Sky Bibliothek (Look-up table) zur Thin-Cloud detektion:
+ -------------------------------------------------------------------------
+ Ein wesentlicher Nachteil der RGB-Methode ist dass sie nicht in der lage ist zuverlässig zwischen dünnen Wolkendecken und klarem Himmel zu unter-
+ scheiden -> wodurch kein EINDEUTIGER THRESHOLD fetgelegt werden kann! (siehe Überlappung im Diagramm 9.7 S 205)
+ Dem Problem kann begegnet werden (siehe Seite 205) indem das RBR eines wolkenlosen Himmels als Funktion von solar-zenith-winkel und Blickwinkel 
+ hinterlegt wird. Dicke Wolken werden mittels eines festen Thresholds der in einer Lookup-Table gespeichert ist detektiert.
+ -> (gute deutsche Erklärung: Schade_Dipl_2005_clear_sky_biblio) auch im Buch weiter unten auf der Seite 207: "For each captured sky image, the 
+ algorithm constructs a clear-sky back-ground image by looking up each pixel’s clear-sky RBR for a given SPA and SZA from the library."
+
+ Basishöhe von Wolken bestimmen:
+ -------------------------------
+ Die Höhe der Wolke spielt eine wichtige Rolle in der 'intrahour solar forecasting'. Der Abstand zwischen der lotrechten Projektion der Wolke und
+ dessen tatsächlichem Schatten am Boden, nimmt linear mit der Höhe der Wolke zu.
+ Häufig einesetzte Methoden sind Ceilometer, Sattelitenbilder oder Aufnahmen durch Radiosondierung.
+ Ein weiteres Verfahren mit hoher Auflösung kann durch Steroskopische Aufnahmen erreicht werden. Hierzu werden zwei Kameras benötigt. Mittels
+ Triangulation kann die Höhe der Wolke bestimmt werden.
+ 
+ Statistisches Verfahren (MSE - mean square error) zur Bestimmung der Wolkenhöhe (Seite 208):
+ ---------------------------------------------------------------------------------------------
+ Dieses Verfahren geht von der Annahme aus das nur eine einschichtige Wolkendecken mit einer Höhe, vorhanden ist. 
+ Bilder von zwei Kameras werden so zugeschnitten das die Bilder jeweils einen Ausschnit von 100° zeigen (so werden Pixel mit grossen zenitalen Winkeln
+ entfernt). Anschliessend werden Algorithmen zur Wolkenerkennung angewendet. Verzerrungen bedingt durch das Objektiv werden korrigiert. Beide Bilder werden 
+ übereinandergelegt. Das MSE (Mean Square Error = difference in intensity values) wird berechnet (sum of the squared pixel-matching error, divided 
+ by the number of overlapping pixels.) Dieses Verfahren wird wiederholt: Bilder werden Pixel für Pixel voneinander entfernt und das MSE wird als 
+ Funktion der Verschiebung R, berechent. 
+ Aus dem Minimum der MSE R* und der Geometrie des Systems, kann die CBH (Cloud Base Hight) berechnet werden.
+ Ein ähnliches Verfahren ist das GPM: georeferenced planes. Zwei Bilder werden auf aufeinanderfolgende Höhen projiziert und ds MSE wird anschliessend berechnet.
+ Das gesuchte CBH entspricht der (gesuchten) Höhe welche den kleinsten Fehler aufweist. Die so erhaltenen Resultate liegen in einer Genauigkeit von 2-6Km.
+ Diese Werte entsprechen denen die aus METAR - Daten gewonnen werden können. Der grosse Vorteil der GPM-Methode ist ihre hohe Granularität in der 
+ Auflösung von Zeit und Höhe, so können neue Höhen-Werte alle 30 Sekunden mit einer Auflösung von 10m berechnet werden.
+ 
+ Correlation Matching for Three-Dimenaional Cloud Fields:
+ --------------------------------------------------------
+ Auch bei diesem Verfahren werden Bilder von zwei Kameras verwendet. Hier geht man jedoch einen Schritt weiter und vergleicht einzelne Regionen 
+ innerhalb der Bilder. Mit diesem Verfahren können unterschiedliche Höhen von verschieden Wolkenschichten innerhalb des Bildes unterscheiden werden.
+ Die Höhe der unterschiedlichen Wolkendecken wird wiederum mittels Triangulation gleicher Bildsegmente bestimmt. Zur Detecktion gleicher Segmente in den 
+ beiden Bildern, verwendet man Kreuzkorrelation. Dieses Verfahren ist sehr rechenintensiv, so müssen die Korrelationsprodukte von jeweils n^4 Pixeln berechnet 
+ werden. Eine Einschränkung durch Konstraints (epipolare Geometrie) kann der Rechenaufwand stark reduziert werden. 
+ Der Gewinn ist jedoch eine zuverlässigere Vorhersage (höhere Genauigkeit).
+ 
+ Schätzen der Wolkengeschwindigkeit:
+ -----------------------------------
+ Die Geschwidigkeit wird aus der Ändnderung der Wolkenposition aus zwei konsekutiven Bildern bestimmt. Die Position-Ändnderung kann mittels normalisiertert
+ Kreuzkorrelation berechnet (NCC). Die Bilder werden in gleichmässige Felder (tiles) unterteilt. Die einzelnen Felder werden mit ihrem Pendeant im zweiten
+ Bild Kreuzkorreliert. (Um genau zu sein auch mit den umliegenden Felder -> 'maximum cross-corelation within the search window'). Feld-paare mit hoher 
+ Kreuzkorrelation weisen auf ein matching eines bestimmten Feldes in den beiden Bildern hin. Die Verschiebung zwischen den Feld-Paaren entspricht der 
+ zurückgelegten Distanz aus der die Geschwindigkeit berechnet werden kann. Die Geschwindigkeit kann als Vektorfeld dargestellt werden.
+ 
+ Error Metrics:
+ --------------
+ S 218 The use of persistence as a baseline forecast is especially useful for short term forecast. Hierzu wird kurz vor der eigentlichen Vorhersage die durch z.B. 
+ ein Pyranometer gemessene Sonneneinstrahlung gemittelt (Messdauer 1 Minute) und anschliessend für das 15 Minute Lange lange Forhersagefenster als Baseline verwendet.
+ 
+ Vorhersage-Fehler liegen begründet in: falsche Wolkendetektion, ungenaue Wolkenhöhe, Kamera Auflösung, ungenaue gemomertische Klabrierung, und Wolken-Advektion = 
+ heranführen (neuer, resp nicht detektierter) Wolken.
+ 
+ Verbesserung der Vorhersage erhofft man sich insbesondere durch stochastisches-Lernen (Machinelearning). Verbesserte räumliche und zeitliche Auflösung.
+ Vorallem muss die Wolkendetecktion weiter verbessert werden, sie ist noch zu ungenau und führt deshalb zu häufig falschen Vorhersagen bezüglich künftiger
+ Wolkenschatten.
+ 
+ Durch fortgeschrittenere Algorithmen zur Segmentierung von Wolken können diese besser klasifiziert werden womit deren wahre position genauer bestimmt werden kann.
+ Insbesondere ist die Verwendung von steroskopischen Aufnahmen vielversprechend insbesondere um genaue 3-Dimensionale Abbildungen von Wolkenformationen zu erzeugen.
+ 
+ Gewinnung optischer Eigenschaften von Wolken:
+ ---------------------------------------------
+ Zusätzliche Grössen wie Albedo, optische Tiefe, mikrophysikalische Eigenschaften,effektifer Radius, Verteilung (size distribution), begünstigen das Modellieren
+ der Sonneneinstrahlung. 
+ ->> Nakajima et al. (1996) developed techniques for retrievals from ground-based instru-ments, but these have not yet been demonstrated with sky imagery. Application
+     of these algorithms could be applied to move the ﬁeld forward. <<- Siehe insbesondere neuste Arbeiten von  Cazorla et al. (2008b, 2009) über AOD.
+ Die optische Tiefe der Wolke, hat den grössten Einfluss auf die Vorhersage der Sonneneinstrahlung eine etwas geringere Bedeutung die optische Aerosol-Tiefe (AOD).
+ Die Extraktion der AOD konnte bereits ersten Erfolgen aufwarten. Die Autoren haben hierzu neuronale-Netzwerke eingesetzt.
+ Es gibt auch einen einfachen linearen Zusammenhang zwischen dem mean der RBR und der AOD bei einer Wellenlänge von 550 nm.
+ 
+ Multiple Wolken-Schicht Detektion und Tracking:
+ -----------------------------------------------
+ Alle bisher beschriebenen Verfahren wurden entwickelt um eine domminante Wolkenschicht zu Tracken. Wesentlich bessere Vorhersagen könen erziehlt werden wenn
+ mehrere übereinaderliegende Schichten Detektiert und verfolgt werden können. Das vielversprechendste Verfahren ist die Wolken-Typ Segmentation. Die Wolken-Typ
+ Segmentation erlaubt es unterscheidliche Schichten innerhalb eins Bildes zu verfolgen.
+ 
+ Drei-Dimensionale Wolken-Feld Rekonstruktion:
+ ---------------------------------------------
+ Die Vernachlässigung der vertikalen Ausdehnung von Wolken führt zu signifikanten Fehlern in der Vorhersage der Sonneneinstrahlung.
+ Mittels dem Einsatz von 'Voxeln' statt 'Pixeln' der räumlichen Darstellung eins Pixels. Durch die 3-dimensionale Darstellung mittels Voxeln von Wolken wobei die
+ optische Tiefe in das Voxel miteinbezogen wird. Hierdurch wird das Ergebnis der Ray-Tracing (Erzeugen des Wolkenschattens) verbessert werden.
+ Denkbar wäre auch die Berücksichtigung von Strahlungs-Transmissions-Modeln, die sich z.B. aus pysikalischen (meteorologischen) Modellen oder aus Satelitenbildern
+ gewinnen liesen. Könnten diese in Echtzeit gewonnen werden, so liese sich die Vorhersage weiter verbessern. (Was aufgrund der benötigten Rechenleistung zur Zeit
+ für einfache Recheneinheiten (noch) nicht in Frage kommt)
+ 
+ Strategien aus Machinelearning:
+ -------------------------------
+ Extending Sky-Imaging Data as Exogenous Variables for solar forecast Siehe ab Seite 392
+ 
+
+ 

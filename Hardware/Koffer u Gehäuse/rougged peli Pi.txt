@@ -1,0 +1,5 @@
+https://hackaday.com/2015/08/13/raspberry-pi-field-unit-rpfu/
+
+waterproof Ethernet port:
+--------------------------
+https://www.adafruit.com/product/827

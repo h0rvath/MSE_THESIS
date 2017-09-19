@@ -1,0 +1,9 @@
+https://indiduino.wordpress.com/2013/02/02/meteostation/
+
+Blog on mlx90614:
+-----------------
+http://bildr.org/2011/02/mlx90614-arduino/
+
+IR-Sensor:
+----------
+http://www.planetarduino.org/?cat=1846

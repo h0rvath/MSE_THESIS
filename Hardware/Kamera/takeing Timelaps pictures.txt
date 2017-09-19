@@ -1,0 +1,30 @@
+1 day may be around 1.3GB
+
+Storing pictures in SQL Database:
+---------------------------------
+https://stackoverflow.com/questions/5613898/storing-images-in-sql-server
+https://www.raspberrypi.org/forums/viewtopic.php?f=32&t=146545
+
+How to setup for time laps pictures:
+------------------------------------
+https://blog.alexellis.io/raspberry-pi-timelapse/
+
+Building waterproof timelaps camers with raspi:
+------------------------------------------------
+https://madisprojects.wordpress.com/2014/06/29/a-timelapse-project-with-dslr-raspberry-pi-eye-fi-and-gphoto2/
+
+Shooting timelaps pictures:
+----------------------------
+https://publiclab.org/notes/mathew/11-03-2013/scripting-raspberry-pi-to-boot-and-shoot-timelapse-photos
+
+Making a movie:
+---------------
+http://www.makeuseof.com/tag/how-to-capture-time-lapse-photography-with-your-raspberry-pi-and-dslr-or-usb-webcam/
+
+Storing pictures:
+-----------------
+https://raspberrypi.stackexchange.com/questions/60089/how-to-easily-unload-images-from-timelapse-rpi-without-display-onto-flashdisk
+
+Motion eye:
+-----------
+http://www.howtoembed.com/projects/raspberry-pi/95-motioneye-with-raspberry-pi

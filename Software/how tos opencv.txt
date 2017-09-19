@@ -1,0 +1,23 @@
+Cloud Identification and Tracking:
+---------------------------------
+http://answers.opencv.org/question/95263/cloud-identification-and-tracking/
+
+software:
+----------------
+pynephoscope: https://github.com/neXyon/pynephoscope
+
+raspberry pi cloud tracking with opencv:
+----------------------------------------
+https://cloudacm.com/?p=1826
+
+Guter Blog, Einführung openCV mit Python:
+-----------------------------------------
+Ausserdem werden Fragen beantwortet wie:
+- CPU oder GPU ?
+- Framworks
+- Algorithmen
+- Thresholding
+- Deep Learning
+- YOLO
+
+https://blog.codecentric.de/2017/06/einfuehrung-in-computer-vision-mit-opencv-und-python/

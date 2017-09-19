@@ -1,0 +1,22 @@
+Raspi HDR Camera von Sony:
+--------------------------
+https://www.digitaltrends.com/computing/raspberry-pi-8mp-camera/
+https://www.golem.de/news/pi-camera-v2-neues-8-megapixel-kameramodul-fuer-den-raspberry-pi-1604-120542.html
+https://www.raspberrypi.org/products/camera-module-v2/ (offical sit)
+HDR feature not usable:
+----------------------
+https://github.com/waveform80/picamera/issues/282
+
+How to use HDR Fotography with Sony (Sustainability 2017, 9, 482 5 of 17):
+------------------------------------
+Pictures taken in direct sunlight suffer from overexposure in regions
+close to the sun and underexposure in areas of dark shade. This is because the complementary
+metal-oxide semiconductor (CMOS) image sensor (SONY IMX219PQ in the Camera Module V2) lacks
+the dynamic range of the human eye. To compensate for this, our software incorporates an exposure
+fusion operation [24,25]. Three images at different exposure times are captured and fused together to
+produce the HDR image shown in Figure 3a
+
+
+HDR - Fotographie
+------------------
+https://blog.codecentric.de/2015/08/wie-der-raspberry-pi2-einen-lang-gehegten-wunsch-erfuellte/

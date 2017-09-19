@@ -1,0 +1,80 @@
+Unterschied C zu CS Mount:
+--------------------------
+https://de.wikipedia.org/wiki/C-Mount
+
+
+Forumsdiskussion bezügl. passender Weitwinkel Objektive für die ZWO 120
+https://stargazerslounge.com/topic/222049-asi120mm-s-first-impressions/
+
+--------------------------------------------------------------------------------------------
+
+Hallo Herr Horvath,
+
+vielen Dank für Ihre Anfrage.
+
+Die ASI besitzt ja einen c-mount Anschluss. Sie könnten also ein Weitwinkel / Fisheye aus dem Video-Objektiv-Bereich nehmen.
+Wir selber führen jedoch so etwas nicht.
+
+Zum Beispiel hier mal schauen:
+
+https://videoueberwachungstechnik-profi.de/videoueberwachung/info/p1154_B-computar-M0814MP---246-52-computar-2-3--Mega-Pixel-Weitwinkel-Objektiv-8mm-F1-4-manuell-bis-3MP.html?gclid=CjwKCAjwlrnNBRBMEiwApKU4PGiXN_iI2B3JNpP_tSXseNI-ig_008TVBvHu48pngNn9LamN76oaSRoCLyIQAvD_BwE
+
+Für einen Fisheye-Winkel müssten Sie unter 2,1mm gehen...
+
+Suchbegriff c-mount weitwinkel oder c-mount fisheye
+
+
+
+Mit freundlichen Grüßen
+Axel Lutz
+
+------------------------------
+
+Astroshop.de
+
+nimax GmbH
+Otto-Lilienthal-Str. 9
+86899 Landsberg - Germany
+
+www.Astroshop.de
+
+Tel.: +498191940491
+Fax: +498191940499
+
+
+Neu von Omegon: Das Handplanetarium Universe2go - jetzt mehr erfahren!
+
+------------------------------
+HRB 21932 - Amtsgericht Augsburg
+Geschäftsführer: Dominik Schwarz, Ben Schwarz, Patrick Bosch
+
+ 
+-----Ursprüngliche Daten-----
+Datum: 04.09.2017 18:50:48
+Von: Horvath Attila <attila_horvath@gmx.ch>
+An: <service@astroshop.de>
+Betreff: [Mailform] Haben Sie ein passendes Fisheye Objektiv?
+Vorgang: T-0VAINN3F27-32
+
+    [Frage zur Bestellung] Haben Sie ein passendes Fisheye Objektiv?
+    _________________
+
+    Name: Horvath Attila
+    E-Mail: attila_horvath@gmx.ch
+    Tel.: 0786096419
+    Bestellnummer: 6079056
+    _________________
+
+    Sehr geehrte Damen und Herren
+
+    Ich habe soeben eine ZWO Kamera ASI 120 MC-S Color bei
+    Ihnen bestellt und möchte diese für AllSky Aufnahmen
+    (Wolken-Aufnahmen) bei Tageslicht einsetzen.
+
+    Haben Sie vielleicht ein passendes Fisheye Objektiv mit 180° im
+    Sortiment oder können Sie mir allenfalls einen Anbieter empfehlen?
+
+    Besten Dank und
+    freundlicher Gruss
+    A. Horvath
+

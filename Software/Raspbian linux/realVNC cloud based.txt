@@ -1,0 +1,7 @@
+Wie das realVNC cloud-based einrichten:
+---------------------------------------
+https://www.raspberrypi.org/documentation/remote-access/vnc/
+
+habe neues account eingerichtet:
+user: attila.horvath@ihomelab.ch
+pw: 123ihomelab

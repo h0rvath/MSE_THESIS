@@ -1,0 +1,3 @@
+Online tool berechnet di eSonneneinstrahlung: (keine Messwerte?)
+---------------------------------------------
+http://re.jrc.ec.europa.eu/pvgis/apps4/pvest.php

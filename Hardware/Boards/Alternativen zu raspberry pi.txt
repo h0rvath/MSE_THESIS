@@ -1,0 +1,21 @@
+Übersicht verschiedener single board computers:
+----------------------------------------------
+https://www.slant.co/topics/1629/~single-board-computers
+
+http://www.giga.de/zubehoer/raspberry-pi/specials/raspberry-pi-alternativen-5-einplatinen-rechner-im-vergleich/
+
+https://www.elv.ch/ARM-Einplatinencomputer-Mini-Rechner-Plattformen-f%C3%BCr-Kreative/x.aspx/cid_726/detail_49102
+
+-ASUS Tinker Board (viele Probleme mit der Software aber gute Hardware)
+
+HW-Vergleich Rasp pi 3 und bananpi 3
+-------------------------------------
+https://www.board-db.org/compare/115,103/
+
+
+
+Intel Joule 570x
+----------------
+https://www.arrow.com/de-de/research-and-events/articles/the-top-ten-development-platforms-dev-kits-for-2017
+
+-> Entwickelt für maschinelles sehen !!

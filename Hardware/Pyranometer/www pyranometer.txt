@@ -1,0 +1,20 @@
+Globalstrahlungssensor
+
+HSLU Pyranometer:
+-----------------
+https://www.hslu.ch/de-ch/technik-architektur/forschung/kompetenzzentren/gebaeudehuelle/envelopes-and-solar-energy/labore-und-infrastruktur/
+
+DIY Pyranomters:
+----------------
+http://www.builditsolar.com/References/Measurements/KitPyr/KitPyr.htm
+http://www.instesre.org/construction/pyranometer/pyranometer.htm
+
+
+Kaufen Silicium-Pyranometer:
+----------------------------
+https://www.meteorologyshop.eu/sensoren/strahlungssensoren/258/pyranometer-si-fotodiode-sp-lite (Silizium-Pyranometer SP-LITE2)
+http://www.kippzonen.com/Product/9/SP-Lite2-Pyranometer (offizielle Seite)
+
+http://www.bakrona-zuerich.ch/onsetcomp/s-lib-m003 (S-LIB-M003)
+
+https://www.reinhardt-testsystem.de/deutsch/klima_sensoren/Sensoren_Serie_485/globalstrahlungssensor_gss_485.php (Globalstrahlungssensor GSS 485)
